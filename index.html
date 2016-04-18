@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ReSur</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+	<class id="canvas"></div>
+	<script type="text/javascript">
+		var dot = document.createElement('div');
+		var canvas = document.getElementById('canvas');
+		var num_h = Math.floor(document.documentElement.clientWidth / 25);
+		var num_v = Math.floor(document.documentElement.clientHeight / 25);
+		function print(count)
+		{
+			dot.className = 'dot dot' + Math.floor(Math.random() * 100);
+			canvas.appendChild(dot.cloneNode(true));
+			count--;
+			if (count > 0) {
+				setTimeout("print(" + count + ")", 10);
+			}
+		}
+		print(num_h * num_v);
+		
+	</script>
+	<!-- <script type="text/javascript" src="/wp-content/themes/portfolio-press-child/js/info.js"></script>  -->
+</body>
+
+</html>
