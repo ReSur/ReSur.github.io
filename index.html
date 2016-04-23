@@ -10,25 +10,57 @@
 </head>
 
 <body>
-	<class id="canvas"></div>
+	<div id="canvas"></div></div>
 	<script type="text/javascript">
+		var dpi = 25;
 		var dot = document.createElement('div');
+		var dots = document.createElement('div');
 		var canvas = document.getElementById('canvas');
-		var num_h = Math.floor(document.documentElement.clientWidth / 25);
-		var num_v = Math.floor(document.documentElement.clientHeight / 25);
-		function print(count)
+		function color(type)
 		{
-			dot.className = 'dot dot' + Math.floor(Math.random() * 100);
-			canvas.appendChild(dot.cloneNode(true));
-			count--;
-			if (count > 0) {
-				setTimeout("print(" + count + ")", 10);
+			return (type + ' color' + Math.floor(Math.random() * 100));
+		}
+		function print(line)
+		{
+			if (line < numVertical())
+			{
+				point = canvas.childNodes[line];
+				if (point.childElementCount < numHorizontal())
+				{
+					dot.className = color('dot');
+					point.appendChild(dot.cloneNode(true));
+				}
+				else
+				{
+					if (!point.hasAttribute('class')) {
+						point.className = color('dots');
+					}
+					line++;
+				}
+				setTimeout("print(" + line + ")", 10);
 			}
 		}
-		print(num_h * num_v);
-		
+		window.onresize = function()
+		{
+			createColumn();
+		}
+		function createColumn() {
+			delta_column =  numVertical() - canvas.childElementCount;
+			for (var i = 0; i < delta_column; i++)
+			{
+				canvas.appendChild(dots.cloneNode(true));
+			}
+			print(0);
+		}
+		function numVertical() {
+			return Math.ceil(document.documentElement.clientHeight / dpi);
+		}
+		function numHorizontal() {
+			return Math.floor(document.documentElement.clientWidth / dpi);
+		}
+		createColumn();
 	</script>
-	<!-- <script type="text/javascript" src="/wp-content/themes/portfolio-press-child/js/info.js"></script>  -->
+	<script type="text/javascript" src="https://1992s.com/wp-content/themes/portfolio-press-child/js/info.js"></script>
 </body>
 
 </html>
