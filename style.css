@@ -16,7 +16,7 @@ body {
 	height: 25px;
 }
 .dot:hover {
-	background-color: balck;
+
 }
 .color0 {background-color: #C8C3BC;}
 .color1 {background-color: #F8F7EB;}
@@ -117,3 +117,5 @@ body {
 .color96, .color99 {background-color: #A6DFDD;}
 .color97 {background-color: #B2D3D3;}
 .color98 {background-color: #ADD4DB;}
+
+.black {background-color: black};

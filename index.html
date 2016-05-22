@@ -16,9 +16,32 @@
 		var dot = document.createElement('div');
 		var dots = document.createElement('div');
 		var canvas = document.getElementById('canvas');
+		var img = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+			[0, 1, 0, 0, 1, 0, 0, 0, 0, 0],
+			[0, 1, 0, 0, 1, 0, 0, 0, 0, 0],
+			[0, 1, 0, 0, 1, 0, 0, 1, 1, 0],
+			[0, 1, 1, 1, 0, 0, 1, 0, 0, 1],
+			[0, 1, 0, 0, 1, 0, 1, 1, 1, 1],
+			[0, 1, 0, 0, 1, 0, 1, 0, 0, 0],
+			[0, 1, 0, 0, 1, 0, 0, 1, 1, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+		var margin_top = 0, margin_left = 0;
 		function color(type)
 		{
 			return (type + ' color' + Math.floor(Math.random() * 100));
+		}
+		function hasClass(obj, cls)
+		{
+			return obj.className.match(new RegExp('(\\s|^)' + cls + '($|\\s)'));
+		}
+		function addClass(obj, cls)
+		{
+			if (!hasClass(obj, cls)) obj.className += " " + cls;
+		}
+		function removeClass(obj, cls)
+		{
+			if (hasClass(obj, cls)) obj.className = obj.className.replace(new RegExp('(\\s|^)' + cls + '($|\\s)'), ' ');
 		}
 		function print(line)
 		{
@@ -38,6 +61,37 @@
 					line++;
 				}
 				setTimeout("print(" + line + ")", 10);
+			}
+			else
+			{
+				margin_top = Math.floor((numVertical() - img.length) / 2);
+				margin_left = Math.floor((numHorizontal() - img[0].length) / 2);
+				draw(0, 0);
+			}
+		}
+		function draw(line, column)
+		{
+			if (line < canvas.childElementCount) {
+				if (column < canvas.childNodes[line].childElementCount)
+				{
+					removeClass(canvas.childNodes[line].childNodes[column], "black");
+					if (line > margin_top && line < margin_top + img.length && column > margin_left && column < margin_left + img[0].length && img[line - margin_top][column - margin_left]){
+						addClass(canvas.childNodes[line].childNodes[column], "black");
+						column++;
+						setTimeout("draw(" + line + ", " + column + ")", 10);
+					}
+					else
+					{
+						column++;
+						draw(line, column);
+					}
+				}
+				else
+				{
+					column = 0;
+					line++;
+					draw(line, column);
+				}
 			}
 		}
 		window.onresize = function()
