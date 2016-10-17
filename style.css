@@ -8,12 +8,27 @@ body {
 }
 .dots {
 	width: 3840px;
-	height: 25px;
 }
 .dot {
 	float: left;
 	width: 25px;
+}
+.dot, .dots {
 	height: 25px;
+	animation: flash 0.4s;
+	-moz-animation: flash 0.4s;
+	-webkit-animation: flash 0.4s;
+	-o-animation: flash 0.4s;
+}
+.active-dot {
+	position: relative;
+	z-index: 999;
+}
+.mask {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background: rgba(255, 255, 255, 0.4);
 }
 .color0 {background-color: #C8C3BC;}
 .color1 {background-color: #F8F7EB;}
@@ -126,3 +141,24 @@ body {
 .__expansion13__ {background-color: #F29600;}
 .__expansion14__ {background-color: #FD984B;}
 .__expansion15__ {background-color: #DD2217;}
+
+@keyframes flash
+{
+from {background: #00DCD4;}
+to {background: #7EDFDC;}
+}
+@-moz-keyframes flash
+{
+from {background: #00DCD4;}
+to {background: #7EDFDC;}
+}
+@-webkit-keyframes flash
+{
+from {background: #00DCD4;}
+to {background: #7EDFDC;}
+}
+@-o-keyframes flash
+{
+from {background: #00DCD4;}
+to {background: #7EDFDC;}
+}
